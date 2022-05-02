@@ -1,0 +1,22 @@
+@font-face {
+	font-family: "Proxima Nova";
+	src: url("assets/Proxima-Nova-Regular.ttf") format("ttf");
+	font-weight: 400;
+}
+@font-face {
+	font-family: "Proxima Nova";
+	src: url("assets/Proxima-Nova-SemiBold.otf") format("otf");
+	font-weight: 600;
+}
+
+body {
+	margin: 0;
+	font-family: "Proxima Nova", Arial, Tahoma, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
