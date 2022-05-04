@@ -1,10 +1,13 @@
 import React from "react";
 import "./App.css";
+import FeedVideos from "./components/FeedVideos";
 
 function App() {
 	return (
 		<div className="App">
-			<h1>TIK TOK CLONE Panda</h1>
+			<main>
+				<FeedVideos />
+			</main>
 		</div>
 	);
 }
