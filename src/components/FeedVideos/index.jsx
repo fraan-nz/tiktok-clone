@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getVideos } from "../../services/index";
 import VideoPlayer from "../VideoPlayer";
 import styles from "./styles.module.css";
 
@@ -13,7 +14,7 @@ const VIDEOS = [
 		songTitle: "Coldplay - Yellow",
 		albumImage:
 			"https://p16-amd-va.tiktokcdn.com/img/tos-useast2a-v-2774/f2ba0427e945424c90a0600954c7e23d~c5_200x200.jpeg",
-		src: "https://v16-webapp.tiktok.com/0dc269b5b1007986928955f517361788/6272b8cd/video/tos/maliva/tos-maliva-ve-0068c799-us/8e7c6aee89ad44ac9af25429eecc12dc/?a=1988&br=2598&bt=1299&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=eXd.6HmzMyq8ZjB4jwe2NwyTyl7Gb&l=20220504113249010189085138219D570A&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M2w6cDw6Zmt4PDMzZzczNEApODo1Nzc2OTw6Nzw2Zzs2ZmdtcWMvcjQwb2FgLS1kMS9zcy81YTQyYzYvMDMyNi5gMzA6Yw%3D%3D&vl=&vr=",
+		src: "https://v16-webapp.tiktok.com/3f58732c018158a6210209621e1be21c/62740a6f/video/tos/maliva/tos-maliva-ve-0068c799-us/8e9047058b0042beb28a98784a094da5/?a=1988&br=4154&bt=2077&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=eXd.6HmzMyq8ZvQXjwe2Nwhoyl7Gb&l=2022050511325601022309914303688E17&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=ajt5amg6ZnhpPDMzZzczNEApOWQzM2VlZjxlNzY0OTxpM2doYWZmcjQwMm1gLS1kMS9zc2AvL2E2NTJgYF5gMjReLl86Yw%3D%3D&vl=&vr=",
 	},
 	{
 		id: 2,
@@ -25,12 +26,23 @@ const VIDEOS = [
 		songTitle: "Coldplay - Yellow",
 		albumImage:
 			"https://p16-amd-va.tiktokcdn.com/img/tos-useast2a-v-2774/f2ba0427e945424c90a0600954c7e23d~c5_200x200.jpeg",
-		src: "https://v16-webapp.tiktok.com/7df6de0bfc8bad6fbe69a885eaa14f5e/6272b8d6/video/tos/useast2a/tos-useast2a-ve-0068c001/9fb6b0817cbd48eabfb21f7d40974717/?a=1988&br=2386&bt=1193&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=eXd.6HmzMyq8ZjB4jwe2NwyTyl7Gb&l=20220504113249010189085138219D570A&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=Mzg4N2Q6ZmRxPDMzNzczM0ApZ2Q5aTg0OWU7N2ZmM2czNWdhNWBpcjRfNGVgLS1kMTZzc2A0YjJjYTUuNmAyXl4uY2A6Yw%3D%3D&vl=&vr=",
+		src: "https://v16-webapp.tiktok.com/cbc3d583111c20326cd7d0950300ed61/62740a5b/video/tos/useast2a/tos-useast2a-ve-0068c003/aab2996fcd144abea0298f2d4e7e324d/?a=1988&br=1160&bt=580&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=eXd.6HmzMyq8ZvQXjwe2Nwhoyl7Gb&l=2022050511325601022309914303688E17&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3B0cmc6Zm07PDMzNzczM0ApOGYzaDQ5NWU6NzM6OTc2Omc1ajNkcjRnZGZgLS1kMTZzczYwMjMzMl9gLzJhYTViMTI6Yw%3D%3D&vl=&vr=",
 	},
 ];
 
 function FeedVideos() {
-	return VIDEOS.map((video) => {
+	const [videos, setVideos] = useState([]);
+	const [error, setError] = useState(null);
+	useEffect(() => {
+		getVideos().then(([error, data]) => {
+			if (error) return setError(error);
+			setVideos(data);
+		});
+	}, []);
+
+	if (error) return <span>{error}</span>;
+
+	return videos.map((video) => {
 		return (
 			<div className={styles.item} key={video.id}>
 				<VideoPlayer {...video} />

@@ -26,7 +26,7 @@
 	padding: 10px;
 	color: #fff;
 	justify-content: space-between;
-	gap: 10px;
+	gap: 12px;
 	background: linear-gradient(
 		0deg,
 		rgba(0, 0, 0, 0.58) 0%,
@@ -35,10 +35,11 @@
 }
 
 .textWrapper {
+	width: 100%;
 	margin-bottom: 8px;
 }
 
-.author {
+.username {
 	font-weight: 600;
 	color: #fff;
 	text-decoration: none;
@@ -48,12 +49,19 @@
 .text {
 	font-size: 15px;
 	margin-top: 8px;
-	margin-bottom: 0;
+	margin-bottom: 8px;
 }
 
 .song {
+	width: 100%;
+	font-size: 15px;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
+}
+
+.songTitle {
+	margin-left: 20px;
 }
 
 @keyframes rotate {

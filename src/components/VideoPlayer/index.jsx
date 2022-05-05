@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 import VideoPlayerActions from "./VideoPlayerActions";
 import VideoDescription from "../VideoDescription";
 
-function VideoPlayer({ author, description, albumImage, songTitle, src }) {
+function VideoPlayer({ users, description, albumImage, songTitle, src }) {
 	const [playing, setPlaying] = useState(false);
 	const video = useRef(null);
 
@@ -18,9 +18,6 @@ function VideoPlayer({ author, description, albumImage, songTitle, src }) {
 		[styles.hidden]: playing,
 	});
 
-	// useEffect(()=> {
-	// },[])
-
 	return (
 		<div className={styles.wrapper}>
 			<video
@@ -31,9 +28,9 @@ function VideoPlayer({ author, description, albumImage, songTitle, src }) {
 				controls={false}
 			/>
 			<i className={playerClassName} onClick={handlePlay} />
-			<VideoPlayerActions />
+			<VideoPlayerActions username={users.username} avatar={users.avatar} />
 			<VideoDescription
-				author={author}
+				username={users.username}
 				description={description}
 				albumImage={albumImage}
 				songTitle={songTitle}
